@@ -130,10 +130,14 @@ class _LoginPageState extends State<LoginPage> {
       width: _deviceWidth * 0.65,
       onPressed: () {
         if (_loginFormKey.currentState!.validate()) {
-          // print("Email: $_email, password: $_password");
+          print("lol");
+          //print("Email: $_email, password: $_password");
           _loginFormKey.currentState!.save();
+          print("lol33");
+
           // print("Email: $_email, password: $_password");
           _auth.loginUsingEmailAndPassword(_email!, _password!);
+          print("lol3");
         }
       },
     );

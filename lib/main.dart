@@ -1,8 +1,8 @@
 import 'package:chat/providers/authentication_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 // Packages
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:provider/provider.dart';
 
 // Services
@@ -17,8 +17,9 @@ import './pages/register_page.dart';
 // Providers
 import './providers/authentication_provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     SplashPage(
       key: UniqueKey(),
@@ -46,7 +47,7 @@ class MainApp extends StatelessWidget {
         title: 'Chat',
         theme: ThemeData(
           backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
-          scaffoldBackgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
+          scaffoldBackgroundColor: const Color.fromRGBO(36, 35, 49, 1.0),
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: Color.fromRGBO(30, 29, 37, 1.0),
           ),

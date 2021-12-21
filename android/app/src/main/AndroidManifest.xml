@@ -2,7 +2,9 @@
     package="com.example.chat">
    <application
         android:label="chat"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
+        <!-- dianas mark line above-->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
