@@ -11,6 +11,8 @@ import '../services/navigation_service.dart';
 // Models
 import '../models/chat_user.dart';
 
+import '../pages/home_page.dart';
+
 class AuthenticationProvider extends ChangeNotifier {
   late final FirebaseAuth _auth;
   late final NavigationService _navigationService;
@@ -38,11 +40,8 @@ class AuthenticationProvider extends ChangeNotifier {
             "last_active": _userData["last_active"],
             "image": _userData["image"],
           });
-          _navigationService.removeAndNavigateToRoute('/home');
         });
-      } else {
-        _navigationService.removeAndNavigateToRoute('/login');
-      }
+      } else {}
     });
   }
 
@@ -51,6 +50,7 @@ class AuthenticationProvider extends ChangeNotifier {
     try {
       await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
+      _navigationService.removeAndNavigateToRoute('/home');
     } on FirebaseAuthException {
       print("Error logging user into Firebase");
     } catch (e) {
@@ -74,6 +74,7 @@ class AuthenticationProvider extends ChangeNotifier {
   Future<void> logout() async {
     try {
       await _auth.signOut();
+      _navigationService.removeAndNavigateToRoute('/login');
     } catch (e) {
       print(e);
     }
