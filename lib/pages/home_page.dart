@@ -3,6 +3,8 @@ import '../pages/chat_page.dart';
 import '../pages/user_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _HomePageState();
@@ -12,8 +14,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentPage = 0;
   final List<Widget> _pages = [
-    ChatsPage(),
-    UserPage(),
+    const ChatsPage(),
+    const UserPage(),
   ];
 
   @override
@@ -31,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             _currentPage = _index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
               label: "Chats", icon: Icon(Icons.chat_bubble_sharp)),
           BottomNavigationBarItem(
