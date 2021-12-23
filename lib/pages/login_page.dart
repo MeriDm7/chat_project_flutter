@@ -97,7 +97,14 @@ class _LoginPageState extends State<LoginPage> {
       child: GradientText(
         'HELLO <3 FLUTTER',
         style: const TextStyle(fontSize: 40, fontFamily: "it"),
-        gradient: LinearGradient(colors: [neored, neopuprle, neored, neopink]),
+        gradient: LinearGradient(colors: [
+          Colors.white,
+          neopuprle,
+          Colors.white,
+          neored,
+          Colors.white,
+          neopink
+        ]),
       ),
     );
   }

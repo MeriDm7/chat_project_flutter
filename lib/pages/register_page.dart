@@ -134,7 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _registerForm() {
     return Container(
-      height: _deviceHeight * 0.35,
+      height: _deviceHeight * 0.4,
       child: Form(
         key: _registerFormKey,
         child: Column(
