@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import '../widgets/custom_colors.dart';
 
 class RoundedImageNetwork extends StatelessWidget {
   final String imagePath;
@@ -81,8 +82,14 @@ class RoundedImageNetworkWithStatusIndicator extends RoundedImageNetwork {
           height: size * 0.20,
           width: size * 0.20,
           decoration: BoxDecoration(
-            color: isActive ? Colors.green : Colors.red,
-            borderRadius: BorderRadius.circular(size),
+            gradient: isActive
+                ? RadialGradient(
+                    colors: [neopink, neored],
+                  )
+                : RadialGradient(
+                    colors: [neopink, neored],
+                  ),
+            borderRadius: BorderRadius.circular(100),
           ),
         ),
       ],
