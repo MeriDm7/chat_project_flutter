@@ -138,6 +138,7 @@ class _ChatsPageState extends State<ChatsPage> {
           ? "Media Attachment"
           : _chat.messages.first.content;
     }
+    final lol = _chat.title().toString();
 
     return CustomListViewTileWithActivity(
       height: _deviceHeight * 0.10,
