@@ -46,9 +46,9 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Chat',
         theme: ThemeData(
-          backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
+          backgroundColor: const Color.fromRGBO(36, 35, 49, 1.0),
           scaffoldBackgroundColor: const Color.fromRGBO(36, 35, 49, 1.0),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             backgroundColor: Color.fromRGBO(30, 29, 37, 1.0),
           ),
         ),
