@@ -29,7 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   firebase_core: "1.6.0"
   firebase_storage: "10.0.3"
   firebase_auth: "3.1.0"
@@ -62,16 +61,30 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
-flutter:
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images/
+  
+
+flutter:
+    assets:
+      - assets/images/
+
+    fonts:
+      - family: modern
+        fonts:
+          - asset: assets/fonts/nasa.ttf
+      - family: it
+        fonts:
+          - asset: assets/fonts/AlegreyaSansSC-MediumItalic.ttf
+      - family : th
+        fonts:
+        - asset: assets/fonts/AlegreyaSansSC-Light.ttf
+    uses-material-design: true
   
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -85,10 +98,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

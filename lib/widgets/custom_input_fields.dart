@@ -23,14 +23,14 @@ class CustomTextFormField extends StatelessWidget {
         return RegExp(regEx).hasMatch(_value!) ? null : 'Enter a valid value';
       },
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(30, 29, 37, 1.0),
+        fillColor: Colors.white24,
         filled: true,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.white54),
+        hintStyle:
+            TextStyle(fontSize: 18, fontFamily: 'th', color: Colors.white70),
       ),
     );
   }
