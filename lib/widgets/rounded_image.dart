@@ -26,7 +26,14 @@ class RoundedImageNetwork extends StatelessWidget {
           image: NetworkImage(imagePath),
         ),
         borderRadius: BorderRadius.all(Radius.circular(size)),
-        color: Colors.black,
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: neopink,
+            spreadRadius: 3,
+            blurRadius: 10.0,
+          ),
+        ],
       ),
     );
   }
@@ -55,7 +62,7 @@ class RoundedImageFile extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(size)),
-        color: Colors.black,
+        color: Colors.white,
       ),
     );
   }
@@ -83,13 +90,13 @@ class RoundedImageNetworkWithStatusIndicator extends RoundedImageNetwork {
           width: size * 0.20,
           decoration: BoxDecoration(
             gradient: isActive
-                ? RadialGradient(
-                    colors: [neopink, neored],
+                ? LinearGradient(
+                    colors: [neored, darkpurple],
                   )
-                : RadialGradient(
-                    colors: [neopink, neored],
+                : LinearGradient(
+                    colors: [Colors.black, darkpurple],
                   ),
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(size),
           ),
         ),
       ],
