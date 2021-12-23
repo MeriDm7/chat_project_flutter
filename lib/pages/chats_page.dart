@@ -12,6 +12,8 @@ import 'package:chat/services/navigation_service.dart';
 
 import '../widgets/top_bar.dart';
 import 'package:chat/widgets/custom_list_view_tiles.dart';
+import '../widgets/custom_colors.dart';
+import '../widgets/gradient_text.dart';
 
 import 'package:chat/models/chat.dart';
 
@@ -57,28 +59,38 @@ class _ChatsPageState extends State<ChatsPage> {
             horizontal: _deviceWight * 0.03, vertical: _deviceHeight * 0.02),
         height: _deviceHeight * 0.98,
         width: _deviceWight * 0.97,
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            stops: [0.1, 0.3, 0.6],
+            colors: [neored, darkpurple, newblue],
+            center: Alignment(0.6, -0.3),
+            focal: Alignment(0.3, -0.1),
+            focalRadius: 1.2,
+          ),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TopBar(
-              'Chats',
-              primaryAction: IconButton(
-                icon: const Icon(
-                  Icons.logout,
-                  color: Color.fromRGBO(0, 82, 218, 1.0),
-                ),
-                onPressed: () {
-                  _auth.logout();
-                },
-              ),
-            ),
+            _pageTitle(),
             _chatsList(),
           ],
         ),
       );
     });
+  }
+
+  Widget _pageTitle() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      height: _deviceHeight * 0.1,
+      child: GradientText(
+        'CHATS',
+        style: const TextStyle(fontSize: 40, fontFamily: "it"),
+        gradient: LinearGradient(colors: [Colors.white, neored, neopink]),
+      ),
+    );
   }
 
   Widget _chatsList() {
@@ -98,7 +110,11 @@ class _ChatsPageState extends State<ChatsPage> {
             return const Center(
               child: Text(
                 "No Chats Found.",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontFamily: 'th',
+                  color: Colors.white,
+                ),
               ),
             );
           }
@@ -122,6 +138,7 @@ class _ChatsPageState extends State<ChatsPage> {
           ? "Media Attachment"
           : _chat.messages.first.content;
     }
+
     return CustomListViewTileWithActivity(
       height: _deviceHeight * 0.10,
       title: _chat.title(),
