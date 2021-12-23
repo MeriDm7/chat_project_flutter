@@ -1,12 +1,13 @@
 // Packages
-import 'package:chat/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
 
 // Widgets
 import '../widgets/custom_input_fields.dart';
-import '../widgets/rounded_button.dart';
+import '../widgets/gradient_button.dart';
+import '../widgets/gradient_text.dart';
+import '../widgets/gradient_background.dart';
 
 //Providers
 import '../providers/authentication_provider.dart';
@@ -27,6 +28,12 @@ class _LoginPageState extends State<LoginPage> {
 
   late AuthenticationProvider _auth;
   late NavigationService _navigation;
+  static const darkpurple = const Color(0xFF400085);
+  static const newblue = const Color(0xFF0f0238);
+
+  static const neored = const Color(0xFFff0217);
+  static const neopink = const Color(0xFFf41c74);
+  static const neopuprle = const Color(0xFFff32ff);
 
   final _loginFormKey = GlobalKey<FormState>();
 
@@ -51,6 +58,15 @@ class _LoginPageState extends State<LoginPage> {
         ),
         height: _deviceHeight * 0.98,
         width: _deviceWidth * 0.97,
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            stops: [0.1, 0.3, 0.6],
+            colors: [neored, darkpurple, newblue],
+            center: Alignment(0.6, -0.3),
+            focal: Alignment(0.3, -0.1),
+            focalRadius: 1.2,
+          ),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -78,20 +94,17 @@ class _LoginPageState extends State<LoginPage> {
   Widget _pageTitle() {
     return Container(
       height: _deviceHeight * 0.10,
-      child: Text(
-        'Chat',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 40,
-          fontWeight: FontWeight.w600,
-        ),
+      child: GradientText(
+        'HELLO <3 FLUTTER',
+        style: const TextStyle(fontSize: 40, fontFamily: "it"),
+        gradient: LinearGradient(colors: [neored, neopuprle, neored, neopink]),
       ),
     );
   }
 
   Widget _loginForm() {
     return Container(
-      height: _deviceHeight * 0.18,
+      height: _deviceHeight * 0.25,
       child: Form(
         key: _loginFormKey,
         child: Column(
@@ -125,10 +138,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginButton() {
-    return RoundedButton(
-      name: "Login",
-      height: _deviceHeight * 0.065,
-      width: _deviceWidth * 0.65,
+    return GradientButton(
+      name: "LOGIN",
       onPressed: () {
         if (_loginFormKey.currentState!.validate()) {
           print("lol");
@@ -149,9 +160,11 @@ class _LoginPageState extends State<LoginPage> {
       onTap: () => _navigation.navigateToRoute('/register'),
       child: Container(
         child: Text(
-          "Don\'t have an account?",
+          "don\'t have an account ?",
           style: TextStyle(
-            color: Colors.blueAccent,
+            fontSize: 22,
+            fontFamily: 'th',
+            color: Colors.white,
           ),
         ),
       ),
