@@ -14,6 +14,7 @@ import '../services/navigation_service.dart';
 import '../widgets/custom_input_fields.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/rounded_image.dart';
+import '../widgets/custom_colors.dart';
 
 // Providers
 import '../providers/authentication_provider.dart';
@@ -33,12 +34,6 @@ class _RegisterPageState extends State<RegisterPage> {
   late DatabaseService _db;
   late CloudStorageService _cloudStorage;
   late NavigationService _navigation;
-  static const darkpurple = const Color(0xFF400085);
-  static const newblue = const Color(0xFF0f0238);
-
-  static const neored = const Color(0xFFff0217);
-  static const neopink = const Color(0xFFf41c74);
-  static const neopuprle = const Color(0xFFff32ff);
   late String? _email;
   String? _password;
   String? _name;

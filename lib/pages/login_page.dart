@@ -8,6 +8,7 @@ import '../widgets/custom_input_fields.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/gradient_text.dart';
 import '../widgets/gradient_background.dart';
+import '../widgets/custom_colors.dart';
 
 //Providers
 import '../providers/authentication_provider.dart';
@@ -28,12 +29,6 @@ class _LoginPageState extends State<LoginPage> {
 
   late AuthenticationProvider _auth;
   late NavigationService _navigation;
-  static const darkpurple = const Color(0xFF400085);
-  static const newblue = const Color(0xFF0f0238);
-
-  static const neored = const Color(0xFFff0217);
-  static const neopink = const Color(0xFFf41c74);
-  static const neopuprle = const Color(0xFFff32ff);
 
   final _loginFormKey = GlobalKey<FormState>();
 

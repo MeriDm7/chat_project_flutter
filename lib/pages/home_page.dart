@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_currentPage],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentPage,
+        selectedItemColor: Colors.white,
         onTap: (_index) {
           setState(() {
             _currentPage = _index;
@@ -35,9 +36,9 @@ class _HomePageState extends State<HomePage> {
         },
         items: const [
           BottomNavigationBarItem(
-              label: "Chats", icon: Icon(Icons.chat_bubble_sharp)),
+              label: "", icon: Icon(Icons.chat_bubble_sharp)),
           BottomNavigationBarItem(
-              label: "Users", icon: Icon(Icons.chat_bubble_sharp)),
+              label: "", icon: Icon(Icons.chat_bubble_sharp)),
         ],
       ),
     );

@@ -38,9 +38,9 @@ class CustomListViewTileWithActivity extends StatelessWidget {
       title: Text(
         title,
         style: const TextStyle(
+          fontSize: 22,
+          fontFamily: 'th',
           color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
         ),
       ),
       subtitle: isActivity
@@ -58,9 +58,10 @@ class CustomListViewTileWithActivity extends StatelessWidget {
           : Text(
               subtitle,
               style: TextStyle(
-                  color: Colors.white54,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400),
+                fontSize: 15,
+                fontFamily: 'it',
+                color: Colors.white,
+              ),
             ),
     );
   }
