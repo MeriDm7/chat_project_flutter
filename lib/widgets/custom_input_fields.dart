@@ -104,7 +104,11 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.white70),
+        hintStyle: const TextStyle(color: Colors.white54),
+        prefixIcon: Icon(
+          icon,
+          color: Colors.white54,
+        ),
       ),
     );
   }
