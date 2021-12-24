@@ -4,6 +4,7 @@ import 'package:chat/widgets/message_bubles.dart';
 import 'package:chat/widgets/rounded_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:chat/widgets/custom_colors.dart';
 
 class CustomListViewTileWithActivity extends StatelessWidget {
   final double height;

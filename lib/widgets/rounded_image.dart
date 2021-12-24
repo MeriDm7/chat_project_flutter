@@ -91,7 +91,7 @@ class RoundedImageNetworkWithStatusIndicator extends RoundedImageNetwork {
           decoration: BoxDecoration(
             gradient: isActive
                 ? LinearGradient(
-                    colors: [neored, darkpurple],
+                    colors: [neored, Colors.white],
                   )
                 : LinearGradient(
                     colors: [Colors.black, darkpurple],
