@@ -150,6 +150,7 @@ class _ChatsPageState extends State<ChatsPage> {
       onTap: () {
         _navigation.navigateToPage(
           ChatPage(chat: _chat),
+          //no
         );
       },
     );

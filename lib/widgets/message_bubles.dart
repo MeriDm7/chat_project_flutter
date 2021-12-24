@@ -1,6 +1,7 @@
 import 'package:chat/models/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:chat/widgets/custom_colors.dart';
 
 class TextMessageBuble extends StatelessWidget {
   final bool isOwnMessage;
@@ -18,43 +19,32 @@ class TextMessageBuble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Color> _colorScheme = isOwnMessage
-        ? [
-            const Color.fromRGBO(0, 136, 249, 1.0),
-            const Color.fromRGBO(0, 82, 218, 1.0),
-          ]
-        : [
-            const Color.fromRGBO(51, 49, 68, 1.0),
-            const Color.fromRGBO(51, 49, 68, 1.0),
-          ];
     return Container(
       height: height + (message.content.length / 20 * 6.0),
-      width: width,
       padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        gradient: LinearGradient(
-          colors: _colorScheme,
-          stops: [0.30, 0.70],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-      ),
+          gradient: LinearGradient(
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+              colors: <Color>[white, tr])),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
             message.content,
             style: const TextStyle(
+              fontSize: 15,
+              fontFamily: 'it',
               color: Colors.white,
             ),
           ),
           Text(
-            timeago.format(message.sentTime),
+            message.sentTime.toString().substring(11, 16),
             style: const TextStyle(
-              color: Colors.white70,
+              fontFamily: 'th',
+              color: const Color.fromRGBO(255, 255, 255, 0.3),
             ),
           )
         ],
@@ -79,15 +69,6 @@ class ImageMessageBuble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Color> _colorScheme = isOwnMessage
-        ? [
-            const Color.fromRGBO(0, 136, 249, 1.0),
-            const Color.fromRGBO(0, 82, 218, 1.0),
-          ]
-        : [
-            const Color.fromRGBO(51, 49, 68, 1.0),
-            const Color.fromRGBO(51, 49, 68, 1.0),
-          ];
     DecorationImage _image = DecorationImage(
       image: NetworkImage(message.content),
       fit: BoxFit.cover,
@@ -97,25 +78,16 @@ class ImageMessageBuble extends StatelessWidget {
         horizontal: width * 0.02,
         vertical: height * 0.03,
       ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        gradient: LinearGradient(
-          colors: _colorScheme,
-          stops: const [0.30, 0.70],
-          begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
-        ),
-      ),
+      decoration: BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
             height: height,
             width: width,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
               image: _image,
             ),
           ),
@@ -123,9 +95,10 @@ class ImageMessageBuble extends StatelessWidget {
             height: height * 0.02,
           ),
           Text(
-            timeago.format(message.sentTime),
+            message.sentTime.toString().substring(11, 16),
             style: const TextStyle(
-              color: Colors.white70,
+              fontFamily: 'th',
+              color: const Color.fromRGBO(255, 255, 255, 0.5),
             ),
           )
         ],

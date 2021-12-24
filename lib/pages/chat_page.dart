@@ -1,3 +1,5 @@
+import 'package:chat/widgets/gradient_button.dart';
+import 'package:chat/widgets/gradient_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -5,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:chat/widgets/top_bar.dart';
 import 'package:chat/widgets/custom_list_view_tiles.dart';
 import 'package:chat/widgets/custom_input_fields.dart';
+import 'package:chat/widgets/gradient_button.dart';
+import 'package:chat/widgets/custom_colors.dart';
 
 import 'package:chat/models/chat.dart';
 import 'package:chat/models/chat_message.dart';
@@ -65,6 +69,15 @@ class _ChatPageState extends State<ChatPage> {
             padding: EdgeInsets.symmetric(
                 horizontal: _deviceWight * 0.03,
                 vertical: _deviceHeight * 0.02),
+            decoration: BoxDecoration(
+              gradient: RadialGradient(
+                stops: [0.1, 0.3, 0.6],
+                colors: [neored, darkpurple, newblue],
+                center: Alignment(0.6, -0.3),
+                focal: Alignment(0.3, -0.1),
+                focalRadius: 1.2,
+              ),
+            ),
             height: _deviceHeight,
             width: _deviceWight * 0.97,
             child: Column(
@@ -78,7 +91,7 @@ class _ChatPageState extends State<ChatPage> {
                   primaryAction: IconButton(
                     icon: const Icon(
                       Icons.delete,
-                      color: Color.fromRGBO(0, 82, 218, 1.0),
+                      color: Color.fromRGBO(255, 255, 255, 1.0),
                     ),
                     onPressed: () {
                       _pageProvider.deleteChat();
@@ -87,7 +100,7 @@ class _ChatPageState extends State<ChatPage> {
                   secondaryAction: IconButton(
                     icon: const Icon(
                       Icons.arrow_back,
-                      color: Color.fromRGBO(0, 82, 218, 1.0),
+                      color: Color.fromRGBO(255, 255, 255, 1.0),
                     ),
                     onPressed: () {
                       _pageProvider.goBack();
@@ -147,14 +160,14 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _sendMessageForm() {
     return Container(
-      height: _deviceHeight * 0.06,
-      decoration: BoxDecoration(
-          color: Color.fromRGBO(30, 29, 37, 1.0),
-          borderRadius: BorderRadius.circular(100)),
-      margin: EdgeInsets.symmetric(
-        horizontal: _deviceWight * 0.04,
-        vertical: _deviceHeight * 0.03,
-      ),
+      //height: _deviceHeight * 0.06,
+      //decoration: BoxDecoration(
+      //  color: Color.fromRGBO(30, 29, 37, 1.0),
+      //  borderRadius: BorderRadius.circular(100)),
+      //margin: EdgeInsets.symmetric(
+      //  horizontal: _deviceWight * 0.04,
+      //  vertical: _deviceHeight * 0.03,
+//),
       child: Form(
         key: _messageFormState,
         child: Row(
@@ -174,12 +187,12 @@ class _ChatPageState extends State<ChatPage> {
   Widget _messageTextField() {
     return SizedBox(
       width: _deviceWight * 0.65,
-      child: ChatTextFromField(
+      child: CustomTextFormField(
         onSaved: (_value) {
           _pageProvider.message = _value;
         },
         regEx: r"^(?!\s*$).+",
-        hintText: "Type a message",
+        hintText: "type a message",
         obscureText: false,
       ),
     );
@@ -188,10 +201,8 @@ class _ChatPageState extends State<ChatPage> {
   Widget _sendMessageButton() {
     double _size = _deviceHeight * 0.04;
     return Container(
-      height: _size,
-      width: _size,
-      child: IconButton(
-        icon: const Icon(Icons.send, color: Colors.white),
+      child: GradientButton(
+        name: "SEND",
         onPressed: () {
           if (_messageFormState.currentState!.validate()) {
             _messageFormState.currentState!.save();
@@ -209,7 +220,7 @@ class _ChatPageState extends State<ChatPage> {
       height: _size,
       width: _size,
       child: FloatingActionButton(
-        backgroundColor: const Color.fromRGBO(0, 82, 218, 1.0),
+        backgroundColor: Colors.transparent,
         onPressed: () {
           _pageProvider.sendImageMessage();
         },
