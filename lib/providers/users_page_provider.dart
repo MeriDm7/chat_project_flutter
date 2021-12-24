@@ -72,11 +72,6 @@ class UsersPageProvider extends ChangeNotifier {
           _selectedUsers.map((_user) => _user.uid).toList();
       _membersIds.add(_auth.user.uid);
       bool _isGroupChat = _selectedUsers.length > 1;
-      DocumentReference? _doc = await _db.createChat({
-        "is_group": _isGroupChat,
-        "is_activity": false,
-        "members": _membersIds,
-      });
       List<ChatUser> _members = [];
       for (var _uid in _membersIds) {
         DocumentSnapshot _userSnapshot = await _db.getUser(_uid);
@@ -113,16 +108,21 @@ class UsersPageProvider extends ChangeNotifier {
           }
         }
       }
-      ChatPage _chatPage = ChatPage(
-        chat: _chatInstance ??
-            Chat(
-                uid: _doc!.id,
-                currentUserUid: _auth.user.uid,
-                members: _members,
-                messages: [],
-                activity: false,
-                group: _isGroupChat),
-      );
+      if (_chatInstance == null) {
+        DocumentReference? _doc = await _db.createChat({
+          "is_group": _isGroupChat,
+          "is_activity": false,
+          "members": _membersIds,
+        });
+        _chatInstance = Chat(
+            uid: _doc!.id,
+            currentUserUid: _auth.user.uid,
+            members: _members,
+            messages: [],
+            activity: false,
+            group: _isGroupChat);
+      }
+      ChatPage _chatPage = ChatPage(chat: _chatInstance);
       _selectedUsers = [];
       notifyListeners();
       _navigation.navigateToPage(_chatPage);
