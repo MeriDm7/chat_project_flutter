@@ -85,34 +85,71 @@ class _ChatPageState extends State<ChatPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                TopBar(
-                  widget.chat.title(),
-                  fontSize: 15,
-                  primaryAction: IconButton(
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Color.fromRGBO(255, 255, 255, 1.0),
-                    ),
-                    onPressed: () {
-                      _pageProvider.deleteChat();
-                    },
-                  ),
-                  secondaryAction: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Color.fromRGBO(255, 255, 255, 1.0),
-                    ),
-                    onPressed: () {
-                      _pageProvider.goBack();
-                    },
-                  ),
-                ),
+                _topBar(),
                 _messagesListView(),
                 _sendMessageForm(),
               ],
             )),
       ));
     });
+  }
+
+  Widget _topBar() {
+    return Container(
+      child: Form(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _deleteButton(),
+            _pageTitle(),
+            _backArrow(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _pageTitle() {
+    return Container(
+      width: _deviceWight * 0.5,
+      height: _deviceHeight * 0.1,
+      alignment: Alignment.centerLeft,
+      child: GradientText(
+        widget.chat.title(),
+        style: const TextStyle(fontSize: 30, fontFamily: "th"),
+        gradient: LinearGradient(colors: [Colors.white, Colors.white]),
+      ),
+    );
+  }
+
+  Widget _backArrow() {
+    return Container(
+        width: _deviceWight * 0.2,
+        child: IconButton(
+          icon: const Icon(
+            Icons.delete,
+            color: Color.fromRGBO(255, 255, 255, 1.0),
+          ),
+          onPressed: () {
+            _pageProvider.deleteChat();
+          },
+        ));
+  }
+
+  Widget _deleteButton() {
+    return Container(
+        width: _deviceWight * 0.2,
+        child: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Color.fromRGBO(255, 255, 255, 1.0),
+          ),
+          onPressed: () {
+            _pageProvider.goBack();
+          },
+        ));
   }
 
   Widget _messagesListView() {
@@ -144,8 +181,9 @@ class _ChatPageState extends State<ChatPage> {
         return const Align(
           alignment: Alignment.center,
           child: Text(
-            "Be the first to say Hi!",
-            style: TextStyle(color: Colors.white),
+            "WHY ARE YOU SO QUIET?",
+            style:
+                TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'th'),
           ),
         );
       }
@@ -160,14 +198,6 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _sendMessageForm() {
     return Container(
-      //height: _deviceHeight * 0.06,
-      //decoration: BoxDecoration(
-      //  color: Color.fromRGBO(30, 29, 37, 1.0),
-      //  borderRadius: BorderRadius.circular(100)),
-      //margin: EdgeInsets.symmetric(
-      //  horizontal: _deviceWight * 0.04,
-      //  vertical: _deviceHeight * 0.03,
-//),
       child: Form(
         key: _messageFormState,
         child: Row(
@@ -175,18 +205,34 @@ class _ChatPageState extends State<ChatPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            _imageMessageButton(),
             _messageTextField(),
             _sendMessageButton(),
-            _imageMessageButton(),
           ],
         ),
       ),
     );
   }
 
+  Widget _imageMessageButton() {
+    double _size = _deviceHeight * 0.04;
+    return Container(
+      height: _size,
+      width: _size,
+      child: FloatingActionButton(
+        backgroundColor: Colors.transparent,
+        onPressed: () {
+          _pageProvider.sendImageMessage();
+        },
+        child: Icon(Icons.camera_alt),
+      ),
+    );
+  }
+
   Widget _messageTextField() {
     return SizedBox(
-      width: _deviceWight * 0.65,
+      height: _deviceHeight * 0.07,
+      width: _deviceWight * 0.60,
       child: CustomTextFormField(
         onSaved: (_value) {
           _pageProvider.message = _value;
@@ -210,21 +256,6 @@ class _ChatPageState extends State<ChatPage> {
             _messageFormState.currentState!.reset();
           }
         },
-      ),
-    );
-  }
-
-  Widget _imageMessageButton() {
-    double _size = _deviceHeight * 0.04;
-    return Container(
-      height: _size,
-      width: _size,
-      child: FloatingActionButton(
-        backgroundColor: Colors.transparent,
-        onPressed: () {
-          _pageProvider.sendImageMessage();
-        },
-        child: Icon(Icons.camera_alt),
       ),
     );
   }

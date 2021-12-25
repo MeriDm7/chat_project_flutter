@@ -2,6 +2,10 @@ import 'package:chat/models/chat_user.dart';
 import 'package:chat/providers/chats_page_provider.dart';
 import 'package:chat/providers/users_page_provider.dart';
 import 'package:chat/widgets/custom_input_fields.dart';
+import 'package:chat/widgets/custom_colors.dart';
+import 'package:chat/widgets/gradient_button.dart';
+import 'package:chat/widgets/gradient_text.dart';
+
 import 'package:chat/widgets/custom_list_view_tiles.dart';
 import 'package:chat/widgets/rounded_button.dart';
 import 'package:chat/widgets/top_bar.dart';
@@ -35,6 +39,7 @@ class _UsersPageState extends State<UsersPage> {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWigth = MediaQuery.of(context).size.width;
     _auth = Provider.of<AuthenticationProvider>(context);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UsersPageProvider>(
@@ -53,6 +58,15 @@ class _UsersPageState extends State<UsersPage> {
       _pageProvider = _context.watch<UsersPageProvider>();
       _chatsProvider = _context.watch<ChatsPageProvider>();
       return Container(
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            stops: [0.1, 0.3, 0.6],
+            colors: [neored, darkpurple, newblue],
+            center: Alignment(0.6, -0.3),
+            focal: Alignment(0.3, -0.1),
+            focalRadius: 1.2,
+          ),
+        ),
         padding: EdgeInsets.symmetric(
           horizontal: _deviceWigth * 0.03,
           vertical: _deviceHeight * 0.02,
@@ -64,34 +78,42 @@ class _UsersPageState extends State<UsersPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TopBar(
-              "Users",
-              primaryAction: IconButton(
-                icon: const Icon(
-                  Icons.logout,
-                  color: Color.fromRGBO(0, 82, 218, 1.0),
-                ),
-                onPressed: () {
-                  _auth.logout();
-                },
-              ),
-            ),
-            CustomTextField(
-              onEditingComplete: (_value) {
-                _pageProvider.getUsers(name: _value);
-                FocusScope.of(context).unfocus();
-              },
-              hintText: "Search..",
-              obscureText: false,
-              controller: _searchFieldTextEditingController,
-              icon: Icons.search,
-            ),
+            _pageTitle(),
+            _search(),
             _usersList(),
             _createChatButton(),
           ],
         ),
       );
     });
+  }
+
+  Widget _pageTitle() {
+    return Container(
+      height: _deviceHeight * 0.1,
+      alignment: Alignment.centerLeft,
+      child: GradientText(
+        "USERS",
+        style: const TextStyle(fontSize: 40, fontFamily: "it"),
+        gradient: LinearGradient(colors: [Colors.white, neored, neopink]),
+      ),
+    );
+  }
+
+  Widget _search() {
+    return SizedBox(
+      height: _deviceHeight * 0.07,
+      child: CustomTextField(
+        onEditingComplete: (_value) {
+          _pageProvider.getUsers(name: _value);
+          FocusScope.of(context).unfocus();
+        },
+        hintText: "Search..",
+        obscureText: false,
+        controller: _searchFieldTextEditingController,
+        icon: Icons.search,
+      ),
+    );
   }
 
   Widget _usersList() {
@@ -119,8 +141,9 @@ class _UsersPageState extends State<UsersPage> {
         } else {
           return const Center(
             child: Text(
-              "No Users Found.",
-              style: TextStyle(color: Colors.white),
+              "NO USERS FOUND",
+              style: TextStyle(
+                  color: Colors.white, fontSize: 18, fontFamily: 'th'),
             ),
           );
         }
@@ -137,12 +160,10 @@ class _UsersPageState extends State<UsersPage> {
   Widget _createChatButton() {
     return Visibility(
       visible: _pageProvider.selectedUsers.isNotEmpty,
-      child: RoundedButton(
+      child: GradientButton(
           name: _pageProvider.selectedUsers.length == 1
-              ? "Chat With ${_pageProvider.selectedUsers.first.name}"
-              : "Create Group Chat",
-          height: _deviceHeight * 0.08,
-          width: _deviceHeight * 0.80,
+              ? "CREATE CHAT"
+              : "CREATE GROUP CHAT",
           onPressed: () {
             _pageProvider.createChat(chats: _chatsProvider.chats);
           }),

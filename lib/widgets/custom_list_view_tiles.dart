@@ -45,17 +45,17 @@ class CustomListViewTile extends StatelessWidget {
       title: Text(
         title,
         style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
+          fontSize: 22,
+          fontFamily: 'th',
           color: Colors.white,
         ),
       ),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-          color: Colors.white54,
+        style: TextStyle(
+          fontSize: 15,
+          fontFamily: 'it',
+          color: const Color.fromRGBO(255, 255, 255, 0.3),
         ),
       ),
     );
