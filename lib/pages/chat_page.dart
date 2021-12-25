@@ -142,9 +142,9 @@ class _ChatPageState extends State<ChatPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _deleteButton(),
-            _pageTitle(),
             _backArrow(),
+            _pageTitle(),
+            _deleteButton(),
           ],
         ),
       ),
@@ -169,11 +169,11 @@ class _ChatPageState extends State<ChatPage> {
         width: _deviceWight * 0.2,
         child: IconButton(
           icon: const Icon(
-            Icons.delete,
+            Icons.arrow_back,
             color: Color.fromRGBO(255, 255, 255, 1.0),
           ),
           onPressed: () {
-            _pageProvider.deleteChat();
+            _pageProvider.goBack();
           },
         ));
   }
@@ -183,11 +183,11 @@ class _ChatPageState extends State<ChatPage> {
         width: _deviceWight * 0.2,
         child: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.delete,
             color: Color.fromRGBO(255, 255, 255, 1.0),
           ),
           onPressed: () {
-            _navigation.goBack();
+            _pageProvider.deleteChat();
           },
         ));
   }
