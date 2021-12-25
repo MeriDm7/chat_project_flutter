@@ -10,8 +10,12 @@ class Chat {
   List<ChatMessage> messages;
 
   late final List<ChatUser> _recepients;
+  final String? groupName;
+  final String? groupImageURL;
 
-  Chat({
+  Chat(
+    this.groupName,
+    this.groupImageURL, {
     required this.uid,
     required this.currentUserUid,
     required this.members,
@@ -27,14 +31,10 @@ class Chat {
   }
 
   String title() {
-    return !group
-        ? _recepients.first.name
-        : _recepients.map((_user) => _user.name).join(", ");
+    return !group ? _recepients.first.name : groupName!;
   }
 
   String imageURL() {
-    return !group
-        ? _recepients.first.imageURL
-        : "https://e7.pngegg.com/pngimages/380/670/png-clipart-group-chat-logo-blue-area-text-symbol-metroui-apps-live-messenger-alt-2-blue-text.png";
+    return !group ? _recepients.first.imageURL : groupImageURL!;
   }
 }

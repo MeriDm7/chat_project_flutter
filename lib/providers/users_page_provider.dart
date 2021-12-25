@@ -1,3 +1,4 @@
+import 'package:chat/pages/create_group_page.dart';
 import 'package:chat/providers/authentication_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -71,7 +72,6 @@ class UsersPageProvider extends ChangeNotifier {
       List<String> _membersIds =
           _selectedUsers.map((_user) => _user.uid).toList();
       _membersIds.add(_auth.user.uid);
-      bool _isGroupChat = _selectedUsers.length > 1;
       List<ChatUser> _members = [];
       for (var _uid in _membersIds) {
         DocumentSnapshot _userSnapshot = await _db.getUser(_uid);
@@ -108,24 +108,35 @@ class UsersPageProvider extends ChangeNotifier {
           }
         }
       }
-      if (_chatInstance == null) {
-        DocumentReference? _doc = await _db.createChat({
-          "is_group": _isGroupChat,
-          "is_activity": false,
-          "members": _membersIds,
-        });
-        _chatInstance = Chat(
-            uid: _doc!.id,
-            currentUserUid: _auth.user.uid,
-            members: _members,
-            messages: [],
-            activity: false,
-            group: _isGroupChat);
+      if (_members.length > 2) {
+        CreateGoupPage createGoupPage = CreateGoupPage(
+          members: _members,
+        );
+        _selectedUsers = [];
+        notifyListeners();
+        _navigation.navigateToPage(createGoupPage);
+      } else {
+        if (_chatInstance == null) {
+          DocumentReference? _doc = await _db.createChat({
+            "is_group": false,
+            "group_name": null,
+            "group_image": null,
+            "is_activity": false,
+            "members": _membersIds,
+          });
+          _chatInstance = Chat(null, null,
+              uid: _doc!.id,
+              currentUserUid: _auth.user.uid,
+              members: _members,
+              messages: [],
+              activity: false,
+              group: false);
+        }
+        ChatPage _chatPage = ChatPage(chat: _chatInstance);
+        _selectedUsers = [];
+        notifyListeners();
+        _navigation.navigateToPage(_chatPage);
       }
-      ChatPage _chatPage = ChatPage(chat: _chatInstance);
-      _selectedUsers = [];
-      notifyListeners();
-      _navigation.navigateToPage(_chatPage);
     } catch (e) {
       print("Error creating chat.");
       print(e);

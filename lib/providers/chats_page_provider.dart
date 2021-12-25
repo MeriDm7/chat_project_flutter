@@ -62,6 +62,8 @@ class ChatsPageProvider extends ChangeNotifier {
                 _messages.add(_message);
               }
               return Chat(
+                _chatData["group_name"],
+                _chatData["group_image"],
                 uid: _d.id,
                 currentUserUid: _auth.user.uid,
                 members: _members,
