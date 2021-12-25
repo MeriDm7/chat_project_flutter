@@ -38,6 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _password;
   String? _name;
   PlatformFile? _profileImage;
+  String? _imageURL;
 
   final _registerFormKey = GlobalKey<FormState>();
 
@@ -119,7 +120,8 @@ class _RegisterPageState extends State<RegisterPage> {
         } else {
           return RoundedImageNetwork(
             key: UniqueKey(),
-            imagePath: "https://i.pravatar.cc/1000?img=64",
+            imagePath:
+                "https://bloximages.chicago2.vip.townnews.com/bgdailynews.com/content/tncms/assets/v3/editorial/2/37/237a7c26-aa1a-54fe-97cd-f45d613fc14e/5de9056c66c60.image.jpg",
             size: _deviceHeight * 0.15,
           );
         }
@@ -145,6 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 regEx: r'.{8,}',
                 hintText: "Name",
+                validationText: "Minimum 8 characters",
                 obscureText: false),
             CustomTextFormField(
                 onSaved: (_value) {
@@ -155,7 +158,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 regEx:
                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                 hintText: "Email",
-                obscureText: true),
+                validationText: "Your email is invalid",
+                obscureText: false),
             CustomTextFormField(
                 onSaved: (_value) {
                   setState(() {
@@ -164,6 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 regEx: r'.{8,}',
                 hintText: "Password",
+                validationText: "Minimum 8 characters",
                 obscureText: true),
           ],
         ),
@@ -175,14 +180,18 @@ class _RegisterPageState extends State<RegisterPage> {
     return GradientButton(
       name: "REGISTER",
       onPressed: () async {
-        if (_registerFormKey.currentState!.validate() &&
-            _profileImage != null) {
+        if (_registerFormKey.currentState!.validate()) {
           _registerFormKey.currentState!.save();
           String? _uid = await _auth.registerUserUsingEmailAndPassword(
               _email!, _password!);
-          String? _imageURL =
-              await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
-          await _db.createUser(_uid, _email!, _name!, _imageURL!);
+          if (_profileImage != null) {
+            _imageURL = await _cloudStorage.saveUserImageToStorage(
+                _uid!, _profileImage!);
+          } else {
+            _imageURL =
+                "https://bloximages.chicago2.vip.townnews.com/bgdailynews.com/content/tncms/assets/v3/editorial/2/37/237a7c26-aa1a-54fe-97cd-f45d613fc14e/5de9056c66c60.image.jpg";
+          }
+          await _db.createUser(_uid!, _email!, _name!, _imageURL!);
           await _auth.logout();
           await _auth.loginUsingEmailAndPassword(_email!, _password!);
         } else {
