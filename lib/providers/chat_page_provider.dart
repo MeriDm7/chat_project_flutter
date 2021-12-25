@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -38,6 +39,18 @@ class ChatPageProvider extends ChangeNotifier {
 
   void set message(String _value) {
     _message = _value;
+  }
+
+  onEmojiSelected(Emoji emoji) {
+    message = message + emoji.emoji;
+    listenToMessages();
+  }
+
+  onBackspacePressed() {
+    if (message.isNotEmpty) {
+      message = message.substring(0, (_message ?? "").length - 1);
+      listenToMessages();
+    }
   }
 
   ChatPageProvider(this._chatId, this._auth, this._messagesViewController) {

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import 'dart:io';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:chat/widgets/top_bar.dart';
 import 'package:chat/widgets/custom_list_view_tiles.dart';
 import 'package:chat/widgets/custom_input_fields.dart';
@@ -39,6 +42,8 @@ class _ChatPageState extends State<ChatPage> {
   late GlobalKey<FormState> _messageFormState;
   late ScrollController _messagesListViewController;
   late NavigationService _navigation;
+  bool emojiShowing = false;
+  double message_box_multiplier = 0.74;
 
   @override
   void initState() {
@@ -92,6 +97,37 @@ class _ChatPageState extends State<ChatPage> {
                 _topBar(),
                 _messagesListView(),
                 _sendMessageForm(),
+                Offstage(
+                  offstage: !emojiShowing,
+                  child: SizedBox(
+                    height: _deviceHeight * 0.2,
+                    child: EmojiPicker(
+                        onEmojiSelected: (Category category, Emoji emoji) {
+                          _pageProvider.onEmojiSelected(emoji);
+                        },
+                        onBackspacePressed: _pageProvider.onBackspacePressed,
+                        config: Config(
+                            columns: 7,
+                            emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
+                            verticalSpacing: 0,
+                            horizontalSpacing: 0,
+                            initCategory: Category.RECENT,
+                            bgColor: const Color(0xFFF2F2F2),
+                            indicatorColor: Colors.blue,
+                            iconColor: Colors.grey,
+                            iconColorSelected: Colors.blue,
+                            progressIndicatorColor: Colors.blue,
+                            backspaceColor: Colors.blue,
+                            showRecentsTab: true,
+                            recentsLimit: 28,
+                            noRecentsText: 'No Recents',
+                            noRecentsStyle: const TextStyle(
+                                fontSize: 20, color: Colors.black26),
+                            tabIndicatorAnimDuration: kTabScrollDuration,
+                            categoryIcons: const CategoryIcons(),
+                            buttonMode: ButtonMode.MATERIAL)),
+                  ),
+                ),
               ],
             )),
       ));
@@ -160,7 +196,7 @@ class _ChatPageState extends State<ChatPage> {
     if (_pageProvider.messages != null) {
       if (_pageProvider.messages!.isNotEmpty) {
         return Container(
-          height: _deviceHeight * 0.74,
+          height: _deviceHeight * message_box_multiplier,
           child: ListView.builder(
             controller: _messagesListViewController,
             itemCount: _pageProvider.messages!.length,
@@ -209,6 +245,7 @@ class _ChatPageState extends State<ChatPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            _addEmojiButton(),
             _imageMessageButton(),
             _messageTextField(),
             _sendMessageButton(),
@@ -260,6 +297,27 @@ class _ChatPageState extends State<ChatPage> {
             _messageFormState.currentState!.reset();
           }
         },
+      ),
+    );
+  }
+
+  Widget _addEmojiButton() {
+    double _size = _deviceHeight * 0.04;
+    return Container(
+      height: _size,
+      width: _size,
+      child: FloatingActionButton(
+        backgroundColor: Colors.transparent,
+        heroTag: 434829,
+        onPressed: () {
+          emojiShowing = !emojiShowing;
+          if (emojiShowing) {
+            message_box_multiplier = 0.5;
+          } else {
+            message_box_multiplier = 0.74;
+          }
+        },
+        child: Icon(Icons.emoji_emotions),
       ),
     );
   }
