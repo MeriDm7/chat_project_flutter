@@ -42,6 +42,17 @@ class _ChatPageState extends State<ChatPage> {
   late NavigationService _navigation;
   bool emojiShowing = false;
   double message_box_multiplier = 0.74;
+  String emojis = "";
+
+  _onEmojiSelected(Emoji emoji) {
+    emojis += emoji.emoji;
+  }
+
+  _onBackspacePressed() {
+    if (emojis.isNotEmpty) {
+      emojis = emojis.substring(0, emojis.length - 1);
+    }
+  }
 
   @override
   void initState() {
@@ -101,9 +112,9 @@ class _ChatPageState extends State<ChatPage> {
                     height: _deviceHeight * 0.2,
                     child: EmojiPicker(
                         onEmojiSelected: (Category category, Emoji emoji) {
-                          _pageProvider.onEmojiSelected(emoji);
+                          _onEmojiSelected(emoji);
                         },
-                        onBackspacePressed: _pageProvider.onBackspacePressed,
+                        onBackspacePressed: _onBackspacePressed,
                         config: Config(
                             columns: 7,
                             emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
@@ -274,7 +285,8 @@ class _ChatPageState extends State<ChatPage> {
       width: _deviceWight * 0.60,
       child: CustomTextFormField(
         onSaved: (_value) {
-          _pageProvider.message = _value;
+          _pageProvider.message = _value + emojis;
+          emojis = "";
         },
         regEx: r"^(?!\s*$).+",
         hintText: "type a message",
@@ -308,12 +320,14 @@ class _ChatPageState extends State<ChatPage> {
         backgroundColor: Colors.transparent,
         heroTag: 434829,
         onPressed: () {
-          emojiShowing = !emojiShowing;
-          if (emojiShowing) {
-            message_box_multiplier = 0.5;
-          } else {
-            message_box_multiplier = 0.74;
-          }
+          setState(() {
+            emojiShowing = !emojiShowing;
+            if (emojiShowing) {
+              message_box_multiplier = 0.5;
+            } else {
+              message_box_multiplier = 0.74;
+            }
+          });
         },
         child: Icon(Icons.emoji_emotions),
       ),

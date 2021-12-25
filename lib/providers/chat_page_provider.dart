@@ -41,18 +41,6 @@ class ChatPageProvider extends ChangeNotifier {
     _message = _value;
   }
 
-  onEmojiSelected(Emoji emoji) {
-    message = message + emoji.emoji;
-    listenToMessages();
-  }
-
-  onBackspacePressed() {
-    if (message.isNotEmpty) {
-      message = message.substring(0, (_message ?? "").length - 1);
-      listenToMessages();
-    }
-  }
-
   ChatPageProvider(this._chatId, this._auth, this._messagesViewController) {
     _db = GetIt.instance.get<DatabaseService>();
     _storage = GetIt.instance.get<CloudStorageService>();
