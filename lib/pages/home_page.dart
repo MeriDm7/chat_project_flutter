@@ -29,6 +29,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _pages[_currentPage],
       bottomNavigationBar: BottomNavigationBar(
+        //backgroundColor: Color.fromRGBO(255, 255, 255, 0.1),
+
         currentIndex: _currentPage,
         selectedItemColor: Colors.white,
         onTap: (_index) {
@@ -38,11 +40,24 @@ class _HomePageState extends State<HomePage> {
         },
         items: const [
           BottomNavigationBarItem(
-              label: "", icon: Icon(Icons.chat_bubble_sharp)),
+              label: "",
+              icon: Icon(
+                Icons.chat_bubble_sharp,
+                size: 30,
+              )),
           BottomNavigationBarItem(
-              label: "", icon: Icon(Icons.supervised_user_circle_outlined)),
+            label: "",
+            icon: Icon(
+              Icons.supervised_user_circle_outlined,
+              size: 36,
+            ),
+          ),
           BottomNavigationBarItem(
-              label: "", icon: Icon(Icons.settings_applications_outlined)),
+              label: "",
+              icon: Icon(
+                Icons.settings_applications_outlined,
+                size: 36,
+              )),
         ],
       ),
     );
