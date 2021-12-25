@@ -7,7 +7,6 @@ import 'package:get_it/get_it.dart';
 import '../widgets/custom_input_fields.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/gradient_text.dart';
-import '../widgets/gradient_background.dart';
 import '../widgets/custom_colors.dart';
 
 //Providers

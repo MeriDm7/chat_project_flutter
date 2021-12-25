@@ -129,5 +129,8 @@ class ChatPageProvider extends ChangeNotifier {
 
   void goBack() {
     _navigation.goBack();
+    if (messages!.isEmpty) {
+      _db.deleteChat(_chatId);
+    }
   }
 }
