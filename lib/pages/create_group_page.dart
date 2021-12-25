@@ -87,7 +87,7 @@ class _CreateGroupPageState extends State<CreateGoupPage> {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             stops: [0.1, 0.3, 0.6],
-            colors: [neored, darkpurple, newblue],
+            colors: [neopink, darkpurple, newblue],
             center: Alignment(0.6, -0.3),
             focal: Alignment(0.3, -0.1),
             focalRadius: 1.2,

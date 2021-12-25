@@ -61,11 +61,11 @@ class _LoginPageState extends State<LoginPage> {
             focalRadius: 1.2,
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
+            SizedBox(
+              height: _deviceHeight * 0.1,
+            ),
             _pageTitle(),
             SizedBox(
               height: _deviceHeight * 0.04,
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
       child: GradientText(
         'HELLO <3 FLUTTER',
         style: const TextStyle(fontSize: 40, fontFamily: "it"),
-        gradient: LinearGradient(colors: [neored, neopuprle, neored, neopink]),
+        gradient: LinearGradient(colors: [Colors.white, neored, neopink]),
       ),
     );
   }
@@ -99,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginForm() {
     return Container(
       height: _deviceHeight * 0.25,
+      width: _deviceWidth * 0.15,
       child: Form(
         key: _loginFormKey,
         child: Column(
@@ -155,6 +156,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Container(
         child: Text(
           "don\'t have an account ?",
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 22,
             fontFamily: 'th',
