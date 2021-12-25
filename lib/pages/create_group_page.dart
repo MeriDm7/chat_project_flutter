@@ -100,25 +100,7 @@ class _CreateGroupPageState extends State<CreateGoupPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AppBar(
-              centerTitle: true,
-              title: GradientText(
-                'New Group',
-                style: const TextStyle(fontSize: 40, fontFamily: "it"),
-                gradient:
-                    LinearGradient(colors: [Colors.white, neored, neopink]),
-              ),
-              backgroundColor: Colors.transparent,
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Color.fromRGBO(0, 82, 218, 1.0),
-                ),
-                onPressed: () {
-                  _navigation.goBack();
-                },
-              ),
-            ),
+            _topBar(),
             SizedBox(
               height: _deviceHeight * 0.03,
               width: _deviceWidth * 0.7,
@@ -141,6 +123,26 @@ class _CreateGroupPageState extends State<CreateGoupPage> {
         ),
       ),
     );
+  }
+
+  Widget _topBar() {
+    return Container(
+        child: Row(children: [
+      IconButton(
+        icon: const Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          _navigation.goBack();
+        },
+      ),
+      GradientText(
+        'New Group',
+        style: const TextStyle(fontSize: 40, fontFamily: "it"),
+        gradient: LinearGradient(colors: [Colors.white, neored, neopink]),
+      )
+    ]));
   }
 
   Widget _groupImageField() {
@@ -186,18 +188,24 @@ class _CreateGroupPageState extends State<CreateGoupPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomTextFormField(
-                  onSaved: (_value) {
-                    setState(() {
-                      _groupName = _value;
-                    });
-                  },
-                  regEx: r'.{2,}',
-                  hintText: "Group Name",
-                  obscureText: false),
+              _createChatForm(),
             ]),
       ),
     );
+  }
+
+  Widget _createChatForm() {
+    return SizedBox(
+        height: _deviceHeight * 0.07,
+        child: CustomTextFormField(
+            onSaved: (_value) {
+              setState(() {
+                _groupName = _value;
+              });
+            },
+            regEx: r'.{2,}',
+            hintText: "Group Name",
+            obscureText: false));
   }
 
   Widget _createChatButton() {

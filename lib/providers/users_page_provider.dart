@@ -142,4 +142,6 @@ class UsersPageProvider extends ChangeNotifier {
       print(e);
     }
   }
+
+  void goBack() {}
 }

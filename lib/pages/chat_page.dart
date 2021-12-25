@@ -9,12 +9,14 @@ import 'package:chat/widgets/custom_list_view_tiles.dart';
 import 'package:chat/widgets/custom_input_fields.dart';
 import 'package:chat/widgets/gradient_button.dart';
 import 'package:chat/widgets/custom_colors.dart';
+import 'package:chat/services/navigation_service.dart';
 
 import 'package:chat/models/chat.dart';
 import 'package:chat/models/chat_message.dart';
 
 import 'package:chat/providers/authentication_provider.dart';
 import 'package:chat/providers/chat_page_provider.dart';
+import 'package:get_it/get_it.dart';
 
 class ChatPage extends StatefulWidget {
   final Chat chat;
@@ -36,12 +38,14 @@ class _ChatPageState extends State<ChatPage> {
 
   late GlobalKey<FormState> _messageFormState;
   late ScrollController _messagesListViewController;
+  late NavigationService _navigation;
 
   @override
   void initState() {
     super.initState();
     _messageFormState = GlobalKey<FormState>();
     _messagesListViewController = ScrollController();
+    _navigation = GetIt.instance.get<NavigationService>();
   }
 
   @override
@@ -147,7 +151,7 @@ class _ChatPageState extends State<ChatPage> {
             color: Color.fromRGBO(255, 255, 255, 1.0),
           ),
           onPressed: () {
-            _pageProvider.goBack();
+            _navigation.goBack();
           },
         ));
   }
