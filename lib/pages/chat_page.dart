@@ -289,6 +289,7 @@ class _ChatPageState extends State<ChatPage> {
           emojis = "";
         },
         regEx: r"^(?!\s*$).+",
+        validationText: "Enter a valid text",
         hintText: "type a message",
         obscureText: false,
       ),

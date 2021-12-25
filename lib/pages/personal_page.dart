@@ -1,6 +1,8 @@
+import 'package:chat/services/media_service.dart';
 import 'package:chat/widgets/custom_colors.dart';
 import 'package:chat/widgets/gradient_button.dart';
 import 'package:chat/widgets/gradient_text.dart';
+import 'package:chat/widgets/rounded_image.dart';
 
 import 'package:flutter/material.dart';
 
@@ -51,11 +53,11 @@ class _PersonalPage extends State<PersonalPage> {
           child: Column(children: [
             _pageTitle(),
             SizedBox(
-              height: _deviceHeight * 0.1,
+              height: _deviceHeight * 0.07,
             ),
             _myPhoto(),
             SizedBox(
-              height: _deviceHeight * 0.1,
+              height: _deviceHeight * 0.05,
             ),
             _myName(),
             _myEmail(),
@@ -80,21 +82,11 @@ class _PersonalPage extends State<PersonalPage> {
   }
 
   Widget _myPhoto() {
-    return Container(
-        decoration: BoxDecoration(
-      image: DecorationImage(
-        image: NetworkImage(_auth.user.imageURL),
-      ),
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-      color: Colors.white,
-      boxShadow: [
-        BoxShadow(
-          color: neopink,
-          spreadRadius: 3,
-          blurRadius: 10.0,
-        ),
-      ],
-    ));
+    return RoundedImageNetwork(
+      key: UniqueKey(),
+      imagePath: _auth.user.imageURL,
+      size: _deviceHeight * 0.13,
+    );
   }
 
   Widget _myName() {

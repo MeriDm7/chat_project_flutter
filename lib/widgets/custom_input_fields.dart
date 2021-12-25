@@ -5,12 +5,14 @@ class CustomTextFormField extends StatelessWidget {
   final String regEx;
   final String hintText;
   final bool obscureText;
+  final String validationText;
 
   CustomTextFormField(
       {required this.onSaved,
       required this.regEx,
       required this.hintText,
-      required this.obscureText});
+      required this.obscureText,
+      required this.validationText});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
       style: TextStyle(color: Colors.white),
       obscureText: obscureText,
       validator: (_value) {
-        return RegExp(regEx).hasMatch(_value!) ? null : 'Enter a valid value';
+        return RegExp(regEx).hasMatch(_value!) ? null : validationText;
       },
       decoration: InputDecoration(
         fillColor: Colors.white24,

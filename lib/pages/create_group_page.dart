@@ -202,6 +202,7 @@ class _CreateGroupPageState extends State<CreateGoupPage> {
             },
             regEx: r'.{2,}',
             hintText: "Group Name",
+            validationText: "Minimum 2 characters",
             obscureText: false));
   }
 

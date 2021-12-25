@@ -115,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                 regEx:
                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                 hintText: "Email",
+                validationText: "Your email is not valid",
                 obscureText: false),
             CustomTextFormField(
                 onSaved: (_value) {
@@ -124,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 regEx: r".{8,}",
                 hintText: "Password",
+                validationText: "Minimum 8 characters",
                 obscureText: true)
           ],
         ),

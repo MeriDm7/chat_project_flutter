@@ -118,7 +118,7 @@ class _UsersPageState extends State<UsersPage> {
     List<ChatUser>? _users = _pageProvider.users;
     List<ChatUser>? _usersToView = [];
     if (_users != null) {
-      for (ChatUser _user in _users!) {
+      for (ChatUser _user in _users) {
         if (_user.uid != _auth.user.uid) {
           _usersToView.add(_user);
         }
