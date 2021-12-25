@@ -13,7 +13,7 @@ import 'package:chat/models/chat_user.dart';
 import 'package:chat/pages/chat_page.dart';
 
 class UsersPageProvider extends ChangeNotifier {
-  AuthenticationProvider _auth;
+  final AuthenticationProvider _auth;
 
   late DatabaseService _db;
   late NavigationService _navigation;
@@ -30,11 +30,6 @@ class UsersPageProvider extends ChangeNotifier {
     _db = GetIt.instance.get<DatabaseService>();
     _navigation = GetIt.instance.get<NavigationService>();
     getUsers();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   void getUsers({String? name}) async {

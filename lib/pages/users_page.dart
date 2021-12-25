@@ -7,8 +7,6 @@ import 'package:chat/widgets/gradient_button.dart';
 import 'package:chat/widgets/gradient_text.dart';
 
 import 'package:chat/widgets/custom_list_view_tiles.dart';
-import 'package:chat/widgets/rounded_button.dart';
-import 'package:chat/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chat/providers/authentication_provider.dart';
@@ -60,10 +58,10 @@ class _UsersPageState extends State<UsersPage> {
       return Container(
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            stops: [0.1, 0.3, 0.6],
+            stops: const [0.1, 0.3, 0.6],
             colors: [neored, darkpurple, newblue],
-            center: Alignment(0.6, -0.3),
-            focal: Alignment(0.3, -0.1),
+            center: const Alignment(0.6, -0.3),
+            focal: const Alignment(0.3, -0.1),
             focalRadius: 1.2,
           ),
         ),
@@ -118,22 +116,31 @@ class _UsersPageState extends State<UsersPage> {
 
   Widget _usersList() {
     List<ChatUser>? _users = _pageProvider.users;
+    List<ChatUser>? _usersToView = [];
+    if (_users != null) {
+      for (ChatUser _user in _users!) {
+        if (_user.uid != _auth.user.uid) {
+          _usersToView.add(_user);
+        }
+      }
+    }
     return Expanded(child: () {
-      if (_users != null) {
-        if (_users.isNotEmpty) {
+      if (_usersToView != null) {
+        if (_usersToView.isNotEmpty) {
           return ListView.builder(
-            itemCount: _users.length,
+            itemCount: _usersToView.length,
             itemBuilder: (BuildContext _context, int _index) {
               return CustomListViewTile(
                 height: _deviceHeight * 0.10,
-                title: _users[_index].name,
-                subtitle: "Last Active: ${_users[_index].lastDayActive()}",
-                imagePath: _users[_index].imageURL,
-                isActive: _users[_index].wasRecentlyActive(),
+                title: _usersToView[_index].name,
+                subtitle:
+                    "Last Active: ${_usersToView[_index].lastDayActive()}",
+                imagePath: _usersToView[_index].imageURL,
+                isActive: _usersToView[_index].wasRecentlyActive(),
                 isSelected:
-                    _pageProvider.selectedUsers.contains(_users[_index]),
+                    _pageProvider.selectedUsers.contains(_usersToView[_index]),
                 onTap: () {
-                  _pageProvider.updateSelectedUsers(_users[_index]);
+                  _pageProvider.updateSelectedUsers(_usersToView[_index]);
                 },
               );
             },

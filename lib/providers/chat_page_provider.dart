@@ -21,10 +21,10 @@ class ChatPageProvider extends ChangeNotifier {
   late MediaService _media;
   late NavigationService _navigation;
 
-  AuthenticationProvider _auth;
-  ScrollController _messagesViewController;
+  final AuthenticationProvider _auth;
+  final ScrollController _messagesViewController;
 
-  String _chatId;
+  final String _chatId;
   List<ChatMessage>? messages;
 
   late StreamSubscription _messagesStream;
@@ -37,7 +37,7 @@ class ChatPageProvider extends ChangeNotifier {
     return message;
   }
 
-  void set message(String _value) {
+  set message(String _value) {
     _message = _value;
   }
 

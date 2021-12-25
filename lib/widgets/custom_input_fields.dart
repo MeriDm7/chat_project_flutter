@@ -90,17 +90,17 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       onEditingComplete: () => onEditingComplete(controller.value.text),
       cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
       obscureText: obscureText,
       decoration: InputDecoration(
         fillColor: Colors.white24,
         filled: true,
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle:
-            TextStyle(fontSize: 18, fontFamily: 'th', color: Colors.white70),
+        hintStyle: const TextStyle(
+            fontSize: 18, fontFamily: 'th', color: Colors.white70),
       ),
     );
   }

@@ -62,10 +62,10 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            stops: [0.1, 0.3, 0.6],
+            stops: const [0.1, 0.3, 0.6],
             colors: [neored, darkpurple, newblue],
-            center: Alignment(0.6, -0.3),
-            focal: Alignment(0.3, -0.1),
+            center: const Alignment(0.6, -0.3),
+            focal: const Alignment(0.3, -0.1),
             focalRadius: 1.2,
           ),
         ),

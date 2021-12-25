@@ -4,7 +4,6 @@ import 'package:chat/widgets/message_bubles.dart';
 import 'package:chat/widgets/rounded_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:chat/widgets/custom_colors.dart';
 
 class CustomListViewTile extends StatelessWidget {
   final double height;
@@ -52,10 +51,10 @@ class CustomListViewTile extends StatelessWidget {
       ),
       subtitle: Text(
         subtitle,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 15,
           fontFamily: 'it',
-          color: const Color.fromRGBO(255, 255, 255, 0.3),
+          color: Color.fromRGBO(255, 255, 255, 0.3),
         ),
       ),
     );
@@ -114,7 +113,7 @@ class CustomListViewTileWithActivity extends StatelessWidget {
             )
           : Text(
               subtitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
                 fontFamily: 'it',
                 color: Colors.white,
@@ -142,7 +141,7 @@ class CustomChatListViewTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       width: width,
       child: Row(
         mainAxisSize: MainAxisSize.max,

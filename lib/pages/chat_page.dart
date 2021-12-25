@@ -7,10 +7,8 @@ import 'package:provider/provider.dart';
 import 'dart:io';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:chat/widgets/top_bar.dart';
 import 'package:chat/widgets/custom_list_view_tiles.dart';
 import 'package:chat/widgets/custom_input_fields.dart';
-import 'package:chat/widgets/gradient_button.dart';
 import 'package:chat/widgets/custom_colors.dart';
 import 'package:chat/services/navigation_service.dart';
 

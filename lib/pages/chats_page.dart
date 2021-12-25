@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 
 import 'package:chat/services/navigation_service.dart';
 
-import '../widgets/top_bar.dart';
 import 'package:chat/widgets/custom_list_view_tiles.dart';
 import '../widgets/custom_colors.dart';
 import '../widgets/gradient_text.dart';

@@ -12,7 +12,7 @@ import 'package:chat/models/chat_message.dart';
 import 'package:chat/models/chat_user.dart';
 
 class ChatsPageProvider extends ChangeNotifier {
-  AuthenticationProvider _auth;
+  final AuthenticationProvider _auth;
 
   late DatabaseService _db;
 

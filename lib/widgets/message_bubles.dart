@@ -1,6 +1,5 @@
 import 'package:chat/models/chat_message.dart';
 import 'package:flutter/material.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:chat/widgets/custom_colors.dart';
 
 class TextMessageBuble extends StatelessWidget {
@@ -21,7 +20,7 @@ class TextMessageBuble extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height + (message.content.length / 20 * 6.0),
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.bottomLeft,
@@ -44,7 +43,7 @@ class TextMessageBuble extends StatelessWidget {
             message.sentTime.toString().substring(11, 16),
             style: const TextStyle(
               fontFamily: 'th',
-              color: const Color.fromRGBO(255, 255, 255, 0.3),
+              color: Color.fromRGBO(255, 255, 255, 0.3),
             ),
           )
         ],
@@ -78,7 +77,7 @@ class ImageMessageBuble extends StatelessWidget {
         horizontal: width * 0.02,
         vertical: height * 0.03,
       ),
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +97,7 @@ class ImageMessageBuble extends StatelessWidget {
             message.sentTime.toString().substring(11, 16),
             style: const TextStyle(
               fontFamily: 'th',
-              color: const Color.fromRGBO(255, 255, 255, 0.5),
+              color: Color.fromRGBO(255, 255, 255, 0.5),
             ),
           )
         ],

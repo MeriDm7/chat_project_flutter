@@ -5,8 +5,8 @@ import 'dart:async';
 
 import 'package:chat/models/chat_message.dart';
 
-const String USER_COLLECTION = "Users";
-const String CHAT_COLLECTION = "Chats";
+const String usersCollection = "Users";
+const String chatsCollection = "Chats";
 const String MESSAGES_COLLECTION = "messages";
 
 class DatabaseService {
@@ -17,7 +17,7 @@ class DatabaseService {
   Future<void> createUser(
       String _uid, String _email, String _name, String _imageURL) async {
     try {
-      await _db.collection(USER_COLLECTION).doc(_uid).set(
+      await _db.collection(usersCollection).doc(_uid).set(
         {
           "email": _email,
           "image": _imageURL,
@@ -31,11 +31,11 @@ class DatabaseService {
   }
 
   Future<DocumentSnapshot> getUser<String>(_uid) {
-    return _db.collection(USER_COLLECTION).doc(_uid).get();
+    return _db.collection(usersCollection).doc(_uid).get();
   }
 
   Future<QuerySnapshot> getUsers({String? name}) {
-    Query _query = _db.collection(USER_COLLECTION);
+    Query _query = _db.collection(usersCollection);
     if (name != null) {
       _query = _query
           .where("name", isGreaterThanOrEqualTo: name)
@@ -46,14 +46,14 @@ class DatabaseService {
 
   Stream<QuerySnapshot> getChatsForUser(String _uid) {
     return _db
-        .collection(CHAT_COLLECTION)
+        .collection(chatsCollection)
         .where("members", arrayContains: _uid)
         .snapshots();
   }
 
   Future<QuerySnapshot> getLastMessageForChat(String _chatID) {
     return _db
-        .collection(CHAT_COLLECTION)
+        .collection(chatsCollection)
         .doc(_chatID)
         .collection(MESSAGES_COLLECTION)
         .orderBy("sent_time", descending: true)
@@ -63,7 +63,7 @@ class DatabaseService {
 
   Stream<QuerySnapshot> streamMessagesForChat(String _chatID) {
     return _db
-        .collection(CHAT_COLLECTION)
+        .collection(chatsCollection)
         .doc(_chatID)
         .collection(MESSAGES_COLLECTION)
         .orderBy("sent_time", descending: false)
@@ -73,7 +73,7 @@ class DatabaseService {
   Future<void> addMessageToChat(String _chatID, ChatMessage _message) async {
     try {
       await _db
-          .collection(CHAT_COLLECTION)
+          .collection(chatsCollection)
           .doc(_chatID)
           .collection(MESSAGES_COLLECTION)
           .add(
@@ -87,7 +87,7 @@ class DatabaseService {
   Future<void> updateChatData(
       String _chatID, Map<String, dynamic> _data) async {
     try {
-      await _db.collection(CHAT_COLLECTION).doc(_chatID).update(_data);
+      await _db.collection(chatsCollection).doc(_chatID).update(_data);
     } catch (e) {
       print(e);
     }
@@ -95,7 +95,7 @@ class DatabaseService {
 
   Future<void> updateUserLastSeenTime(String _uid) async {
     try {
-      await _db.collection(USER_COLLECTION).doc(_uid).update(
+      await _db.collection(usersCollection).doc(_uid).update(
         {
           "last_active": DateTime.now().toUtc(),
         },
@@ -107,7 +107,7 @@ class DatabaseService {
 
   Future<void> deleteChat(_chatID) async {
     try {
-      await _db.collection(CHAT_COLLECTION).doc(_chatID).delete();
+      await _db.collection(chatsCollection).doc(_chatID).delete();
     } catch (e) {
       print(e);
     }
@@ -116,7 +116,7 @@ class DatabaseService {
   Future<DocumentReference?> createChat(Map<String, dynamic> _data) async {
     try {
       DocumentReference _chat =
-          await _db.collection(CHAT_COLLECTION).add(_data);
+          await _db.collection(chatsCollection).add(_data);
       return _chat;
     } catch (e) {
       print(e);
