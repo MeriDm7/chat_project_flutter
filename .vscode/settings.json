@@ -1,4 +1,5 @@
 {
     "java.import.gradle.home": "",
-    "java.import.gradle.user.home": ""
+    "java.import.gradle.user.home": "",
+    "dart.flutterSdkPath": "D:\\Projects\\flutter"
 }

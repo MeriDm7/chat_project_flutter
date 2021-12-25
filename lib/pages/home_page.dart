@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'chats_page.dart';
-import '../pages/user_page.dart';
+import 'users_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,8 +14,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentPage = 0;
   final List<Widget> _pages = [
-    ChatsPage(),
-    const UserPage(),
+    const ChatsPage(),
+    const UsersPage(),
   ];
 
   @override

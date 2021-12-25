@@ -1,18 +1,17 @@
 import 'dart:async';
 
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-
-import 'package:chat/services/database_service.dart';
-import 'package:chat/services/cloud_strorage_service.dart';
-import 'package:chat/services/media_service.dart';
-import 'package:chat/services/navigation_service.dart';
-
-import 'package:chat/providers/authentication_provider.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:chat/models/chat_message.dart';
+import 'package:chat/providers/authentication_provider.dart';
+import 'package:chat/services/cloud_strorage_service.dart';
+import 'package:chat/services/database_service.dart';
+import 'package:chat/services/media_service.dart';
+import 'package:chat/services/navigation_service.dart';
 
 class ChatPageProvider extends ChangeNotifier {
   late DatabaseService _db;
@@ -38,6 +37,18 @@ class ChatPageProvider extends ChangeNotifier {
 
   void set message(String _value) {
     _message = _value;
+  }
+
+  onEmojiSelected(Emoji emoji) {
+    message = message + emoji.emoji;
+    listenToMessages();
+  }
+
+  onBackspacePressed() {
+    if (message.isNotEmpty) {
+      message = message.substring(0, (_message ?? "").length - 1);
+      listenToMessages();
+    }
   }
 
   ChatPageProvider(this._chatId, this._auth, this._messagesViewController) {
