@@ -9,6 +9,7 @@ import 'package:chat/services/media_service.dart';
 import 'package:chat/services/navigation_service.dart';
 import 'package:chat/widgets/custom_colors.dart';
 import 'package:chat/widgets/custom_input_fields.dart';
+import 'package:chat/widgets/custom_list_view_tiles.dart';
 import 'package:chat/widgets/gradient_button.dart';
 import 'package:chat/widgets/gradient_text.dart';
 import 'package:chat/widgets/rounded_image.dart';
@@ -112,6 +113,10 @@ class _CreateGroupPageState extends State<CreateGoupPage> {
               height: _deviceHeight * 0.01,
               width: _deviceWidth * 0.6,
             ),
+            _membersList(),
+            SizedBox(
+              height: _deviceHeight * 0.07,
+            ),
             _createChatButton(),
             SizedBox(
               height: _deviceHeight * 0.02,
@@ -176,7 +181,7 @@ class _CreateGroupPageState extends State<CreateGoupPage> {
 
   Widget _groupNameForm() {
     return Container(
-      height: _deviceHeight * 0.50,
+      height: _deviceHeight * 0.2,
       width: _deviceWidth * 0.5,
       child: Form(
         key: _groupCreatingFormKey,
@@ -187,6 +192,23 @@ class _CreateGroupPageState extends State<CreateGoupPage> {
             children: [
               _createChatForm(),
             ]),
+      ),
+    );
+  }
+
+  Widget _membersList() {
+    return Container(
+      height: _deviceHeight * 0.25,
+      child: ListView.builder(
+        itemCount: widget.members.length,
+        itemBuilder: (BuildContext _context, int _index) {
+          return CustomGroupMembersViewTile(
+              height: _deviceHeight * 0.05,
+              title: widget.members[_index].name,
+              imagePath: widget.members[_index].imageURL,
+              isActive: widget.members[_index].wasRecentlyActive(),
+              onTap: () {});
+        },
       ),
     );
   }

@@ -61,6 +61,44 @@ class CustomListViewTile extends StatelessWidget {
   }
 }
 
+class CustomGroupMembersViewTile extends StatelessWidget {
+  final double height;
+  final String title;
+  final String imagePath;
+  final bool isActive;
+  final Function onTap;
+
+  CustomGroupMembersViewTile({
+    required this.height,
+    required this.title,
+    required this.imagePath,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () => onTap(),
+      minVerticalPadding: height * 0.20,
+      leading: RoundedImageNetworkWithStatusIndicator(
+        key: UniqueKey(),
+        size: height / 2,
+        imagePath: imagePath,
+        isActive: isActive,
+      ),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 22,
+          fontFamily: 'th',
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
 class CustomListViewTileWithActivity extends StatelessWidget {
   final double height;
   final String title;
